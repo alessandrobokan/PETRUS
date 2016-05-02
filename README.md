@@ -24,6 +24,16 @@ spelling, but **predominating** phonology of words. Thus, the words "obstrução
 "assado" (roasted) are divided into syllables as follows, respectively: (o.bs.tru.ção), (a.rre.don.dar) and (a.ssa.do).
 
 
+About
+=====
+The automatic phonetic transcription called Pɛtɾʊs is a project carried out in Instituto de Biociências, Letras e
+Ciências Exatas da UNESP ([IBILCE](http://www.ibilce.unesp.br/)), by the doctoral student in linguistic
+[Vanessa Marquiafavel Serrani](http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4771845J5), under the
+supervision of Prof. Dra. [Claudia Zavaglia](http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4790044E8).
+Pɛtɾʊs is dedicated to the automatic phonetic transcription of simple words fromBrazilian Portuguese, having as
+reference **São Paulo** state standard pronunciation.
+
+
 ***
 Usage
 =====
