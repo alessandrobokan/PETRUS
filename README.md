@@ -1,23 +1,40 @@
-Pɛtɾʊs (PhonEtic TRanscriber for User Support.)
+Pɛtɾʊs (PhonEtic TRanscriber for User Support)
 =========================
 
 Pɛtɾʊs is a an online automatic phonetic transcription system for Brazilian Portuguese. For example, Pɛtɾʊs
-automatically converts a sequence of letters like <descrédito> into a sequence of phones [ʤiskɾɛʤɪtʊ]
+automatically converts a sequence of letters like <descrédito> into a sequence of phones [ʤiskɾɛʤɪtʊ].
+
+In order to represent the pronunciation of a word, the [IPA](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet)
+(International Phonetic Alphabet), a latin-based alphabetical system for phonetic notation, is utilized.
+Beyond phonetic transcription, Pɛtɾʊs offers more information to users like: stressed syllable identification and
+syllabification. Also, it transcribes hetereophonic homographs (words with the same spelling, but different
+pronunciation), generating both forms as output.
+
+If you would like to transcribe a single word or a file, just go to the main [website](http://54.232.255.128/).
 
 
-See the website: http://54.232.255.128/
+***
+What's syllabification?
+=====
+The syllabic division consists in the identification and delimitation of the syllables that constitute each word.
+To perform this task automatically by Pɛtɾʊs, we adopted a rule-based algorithms described in Silva (2011) and CECI.
+
+The syllabification algorithms proposed by Silva (2011, p. 39) were developed on the basis of the Brazilian Portuguese
+spelling, but predominating phonology of words. Thus, the words "obstrução" (occlusion), "arredondar" (to round) and
+"assado" (roasted) are divided into syllables as follows, respectively: (o.bs.tru.ção), (a.rre.don.dar) and (a.ssa.do).
+
 
 ***
 Usage
 =====
 
-* Test by word using the Silva2011 algorithm:
+* Test by word using the "Silva2011" algorithm:
 
 ```
 $ python test_word.py -s silva -w chocolate
 ```
 
-or using the CECI algorithm:
+or using the "CECI" algorithm:
 
 ```
 $ python test_word.py -s ceci -w chocolate
@@ -30,7 +47,7 @@ $ python test_word.py -s ceci -w chocolate
 $ python test_file.py -s silva -f example.txt
 ```
 
-or using the CECI algorithm:
+or:
 
 ```
 $ python test_file.py -s ceci -f example.txt
