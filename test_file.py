@@ -5,11 +5,6 @@ from __future__ import unicode_literals
 
 from argparse import ArgumentParser
 
-from syllables.ceci import CECISyllableSeparator
-from syllables.silva2011 import Silva2011SyllableSeparator
-
-from stress.tonic import StressDetector
-
 from g2p.g2p import G2PTranscriber
 
 import os
