@@ -28,19 +28,26 @@ spelling, but **predominating** phonology of words. Thus, the words "obstrução
 Usage
 =====
 
-* Test by word using the "Silva2011" algorithm:
+* Test by word using the Silva (2011) algorithm:
 
 ```
 $ python test_word.py -s silva -w chocolate
+$ guerra -> [ˈge.xa] | gue-rra | [gue]-rra
 ```
 
-or using the "CECI" algorithm:
+* Test by word using the CECI algorithm:
 
 ```
 $ python test_word.py -s ceci -w chocolate
+$ guerra -> [ˈge.xa] | guer-ra | [guer]-ra
 ```
 
+* Example transcribing transcribes hetereophonic homographs:
 
+```
+$ python test_word.py -s silva -w molho
+$ molho -> [ˈmo.ʎʊ, ˈmɔ.ʎʊ] | mo-lho | [mo]-lho
+```
 
 * Test by file:
 
