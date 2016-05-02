@@ -50,13 +50,19 @@ if __name__ == '__main__':
     # Iterate input file
     for line in args.file.readlines():
         # Get input word
-        word = line.strip()
-        # Initialize syllable separator
-        separator = Silva2011SyllableSeparator(word) if args.separator == 'silva2011' else CECISyllableSeparator(word)
+        word = line.strip().lower()
         # Initialize stress detector
         stress = StressDetector(word)
+        # Initialize syllable separator
+        if args.separator == 'silva':
+            separator = Silva2011SyllableSeparator(word, stress.get_stress_vowel())
+        else:
+            separator = CECISyllableSeparator(word)
         # Separate syllables
-        syllables = separator.separate()
+        try:
+            syllables = separator.separate()
+        except (ValueError, IndexError):
+            continue
         # Transform list of syllables, e.g. [u'co', u'mi', u'da'] -> 'co-mi-da'
         syllables = ('-').join(syllables)
         # Get stress syllable positions
@@ -65,9 +71,8 @@ if __name__ == '__main__':
         transcriber = G2PTranscriber(word, syllables)
         # Transcribe to phonemes
         phonemes = transcriber.transcriber(stress)
-
+        # Write file
         f.write('{0} -> [{1}] | {2}[{3}]{4}\r\n'.format(word, phonemes, syllables[:a], syllables[a:b], syllables[b:]))
-
     # Close output file
     f.close()
 

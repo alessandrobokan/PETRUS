@@ -65,11 +65,12 @@ class Silva2011SyllableSeparator(object):
         em HMM. PhD dissertation, COPPE, UFRJ.
 
     """
-    def __init__(self, word):
+    def __init__(self, word, stress):
         try:
             self.word = word.decode('utf-8').lower()
         except (UnicodeDecodeError, UnicodeEncodeError):
             self.word = word.lower()
+        self.stress = stress
 
     def separate(self):
         """
@@ -83,7 +84,7 @@ class Silva2011SyllableSeparator(object):
         w = self.word
         p = [match.start() for match in re.finditer(vowels, w, re.UNICODE)]
         p0 = 0  # Syllable start position
-        pVt = tonic_vowel(w)  # Tonic vowel position
+        pVt = self.stress  # Tonic vowel position
         k = 0
         c = 0  # Count hyphens
 

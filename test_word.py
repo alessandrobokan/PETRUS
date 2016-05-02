@@ -33,13 +33,19 @@ if __name__ == '__main__':
     )
     args = parser.parse_args()
     # Get the input word
-    word = args.word.decode('utf-8')
-    # Initialize the syllable separator
-    separator = Silva2011SyllableSeparator(word) if args.separator == 'silva2011' else CECISyllableSeparator(word)
+    word = args.word.decode('utf-8').lower()
     # Initialize stress detector
     stress = StressDetector(word)
+    # Initialize syllable separator
+    if args.separator == 'silva':
+        separator = Silva2011SyllableSeparator(word, stress.get_stress_vowel())
+    else:
+        separator = CECISyllableSeparator(word)
     # Separate syllables
-    syllables = separator.separate()
+    try:
+        syllables = separator.separate()
+    except (ValueError, IndexError):
+        syllables = [word]
     # Transform list of syllables, e.g. [u'co', u'mi', u'da'] -> 'co-mi-da'
     syllables = ('-').join(syllables)
     # Get stress syllable positions
