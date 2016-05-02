@@ -31,7 +31,7 @@ Usage
 * Test by word using the Silva (2011) algorithm:
 
 ```
-$ python test_word.py -s silva -w chocolate
+$ python test_word.py -s silva -w guerra
 
 guerra -> [ˈge.xa] | gue-rra | [gue]-rra
 
@@ -40,13 +40,13 @@ guerra -> [ˈge.xa] | gue-rra | [gue]-rra
 * Test by word using the CECI algorithm:
 
 ```
-$ python test_word.py -s ceci -w chocolate
+$ python test_word.py -s ceci -w guerra
 
 guerra -> [ˈge.xa] | guer-ra | [guer]-ra
 
 ```
 
-* Example transcribing transcribes hetereophonic homographs:
+* Example transcribing transcribes Hetereophonic Homographs (HHs):
 
 ```
 $ python test_word.py -s silva -w molho
