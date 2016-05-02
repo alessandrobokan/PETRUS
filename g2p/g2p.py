@@ -24,6 +24,11 @@ from __future__ import unicode_literals
 
 from utils import load_prefixes, load_homographs_heterophones
 
+from stress.tonic import StressDetector
+
+from syllables.silva2011 import Silva2011SyllableSeparator
+from syllables.ceci import CECISyllableSeparator
+
 import re
 import os
 
@@ -45,19 +50,65 @@ C = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 
 # Vowels
 V = ['a', 'e', 'o', 'á', 'é', 'í', 'ó', 'ú', 'ã', 'õ', 'â', 'ê', 'ô', 'à', 'ü']
 
+
 class G2PTranscriber(object):
     """
     This class implements the G2P transcriber algorithm presented in the
     Phd thesis of Marquiafavel [2014]
 
     """
-    def __init__(self, word, syllables):
+    def __init__(self, word, algorithm='silva'):
+        # Initialize word
         try:
-            self.word = word.decode('utf-8')
-            self.syllables = syllables.decode('utf-8')
+            self.word = word.decode('utf-8').lower()
         except (UnicodeDecodeError, UnicodeEncodeError):
-            self.word = word
-            self.syllables = syllables
+            self.word = word.lower()
+
+        # Initialize stress detector
+        self.stress = StressDetector(self.word)
+
+        # Initialize syllable separator
+        if algorithm == 'silva':
+            self.separator = Silva2011SyllableSeparator(self.word, self.stress.get_stress_vowel())
+        else:
+            self.separator = CECISyllableSeparator(self.word)
+
+        # Initialize syllables
+        self.syllables = self.get_syllables_with_hyphen()
+
+    def get_syllables(self):
+        """
+        Returns a list of syllables
+
+        Returns: List of syllables, e.g. ['cho', 'co', 'la', 'te']
+
+        """
+        try:
+            return self.separator.separate()
+        except (ValueError, IndexError):
+            return [self.word]
+
+    def get_syllables_with_hyphen(self):
+        """
+        Returns syllables with hyphen
+
+        Returns: syllables, e.g, "cho-co-la-te"
+
+        """
+        return ('-').join(self.get_syllables())
+
+    def get_syllables_with_stress_boundaries(self):
+        """
+        Returns syllables divided by '-' pointing the stress syllable with '[]'
+
+        Returns: syllables with stress boundaries, e.g "cho-co-[la]-te"
+
+        """
+        a, b = self.stress.get_stress_syllable_with_hyphen(self.syllables)
+
+        return '{0}[{1}]{2}'.format(
+            self.syllables[:a], self.syllables[a:b], self.syllables[b:]
+        )
 
     def is_tonic_syllable(self, a, b, i):
         return True if a <= i and i <= b else False
@@ -87,7 +138,7 @@ class G2PTranscriber(object):
                 return i, j, tam, self.syllables, w
         return i, j, tam, self.syllables, w
 
-    def transcriber(self, stress):
+    def transcriber(self):
         """
         Transcribe graphemes to phonemes.
 
@@ -105,7 +156,7 @@ class G2PTranscriber(object):
         i, j, tam, word, w = self.pre_transcriber()
 
         # Get stress syllable boundaries
-        ts1 , ts2 = stress.get_stress_syllable_with_hyphen(self.syllables)
+        ts1 , ts2 = self.stress.get_stress_syllable_with_hyphen(self.syllables)
 
         # TODO Translate commentaries from Portuguese to English
 
@@ -1401,6 +1452,6 @@ class G2PTranscriber(object):
             j += 1
 
         # Get stress phonetic syllable boundaries
-        a , b = stress.get_stress_phonetic_syllable(self.syllables, w)
+        a , b = self.stress.get_stress_phonetic_syllable(self.syllables, w)
 
         return (w[:a] + 'ˈ' + w[a:]).replace('-', '.')

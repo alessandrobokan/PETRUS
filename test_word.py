@@ -34,25 +34,12 @@ if __name__ == '__main__':
     args = parser.parse_args()
     # Get the input word
     word = args.word.decode('utf-8').lower()
-    # Initialize stress detector
-    stress = StressDetector(word)
-    # Initialize syllable separator
-    if args.separator == 'silva':
-        separator = Silva2011SyllableSeparator(word, stress.get_stress_vowel())
-    else:
-        separator = CECISyllableSeparator(word)
-    # Separate syllables
-    try:
-        syllables = separator.separate()
-    except (ValueError, IndexError):
-        syllables = [word]
-    # Transform list of syllables, e.g. [u'co', u'mi', u'da'] -> 'co-mi-da'
-    syllables = ('-').join(syllables)
-    # Get stress syllable positions
-    a, b = stress.get_stress_syllable_with_hyphen(syllables)
-    # Initialize g2p transcriber
-    transcriber = G2PTranscriber(word, syllables)
-    # Transcribe to phonemes
-    phonemes = transcriber.transcriber(stress)
+    # Initialize G2P transcriber
+    g2p = G2PTranscriber(word, algorithm=args.separator)
 
-    print '\n{0} -> [{1}] | {2}[{3}]{4}\n'.format(word, phonemes, syllables[:a], syllables[a:b], syllables[b:])
+    print '\n{0} -> [{1}] | {2} | {3}\n'.format(
+        word,
+        g2p.transcriber(),
+        g2p.get_syllables_with_hyphen(),
+        g2p.get_syllables_with_stress_boundaries()
+    )
