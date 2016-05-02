@@ -16,10 +16,10 @@ If you would like to transcribe a single word or a file, just go to the main [we
 What's syllabification?
 =====
 The syllabic division consists in the identification and delimitation of the syllables that constitute each word.
-To perform this task automatically by Pɛtɾʊs, we adopted two algorithm: a rule-based algorithm described in Silva (2011)
+To perform this task automatically by Pɛtɾʊs, we adopted two algorithms: a rule-based algorithm described in Silva (2011)
 and the CECI algorithm.
 
-The syllabification algorithms proposed by Silva (2011, p. 39) were developed on the basis of the Brazilian Portuguese
+The syllabification algorithm proposed by Silva (2011, p. 39) was developed on the basis of the Brazilian Portuguese
 spelling, but **predominating** phonology of words. Thus, the words "obstrução" (occlusion), "arredondar" (to round) and
 "assado" (roasted) are divided into syllables as follows, respectively: (o.bs.tru.ção), (a.rre.don.dar) and (a.ssa.do).
 
