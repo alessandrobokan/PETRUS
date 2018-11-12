@@ -22,7 +22,7 @@
 
 from __future__ import unicode_literals
 
-from utils import load_prefixes, load_homographs_heterophones
+from .utils import load_prefixes, load_homographs_heterophones
 
 from stress.tonic import StressDetector
 
@@ -31,6 +31,10 @@ from syllables.ceci import CECISyllableSeparator
 
 import re
 import os
+import sys
+
+if sys.version_info[0] == 3:
+    unichr =  chr
 
 PATH_PREFIXES = os.path.dirname(__file__) +\
                 '/resources/prefixes.txt'
@@ -61,7 +65,7 @@ class G2PTranscriber(object):
         # Initialize word
         try:
             self.word = word.decode('utf-8').lower()
-        except (UnicodeDecodeError, UnicodeEncodeError):
+        except:
             self.word = word.lower()
 
         # Initialize stress detector

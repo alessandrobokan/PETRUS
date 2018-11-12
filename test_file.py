@@ -58,4 +58,4 @@ if __name__ == '__main__':
     # Close output file
     f.close()
 
-    print '\nSuccess!!! Open the "output.txt" file to see the result.\n'
+    print('\nSuccess!!! Open the "output.txt" file to see the result.\n')
