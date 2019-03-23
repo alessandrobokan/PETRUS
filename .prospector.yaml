@@ -26,11 +26,6 @@ pyflakes:
 
 pylint:
   run: true
-  disable:
-    - too-few-public-methods
-    - invalid-name
-    - no-self-use
-    - no-member
 
 dodgy:
   run: true
