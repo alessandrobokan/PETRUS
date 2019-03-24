@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- encoding:utf-8 -*-
+# -*- encoding:utf-8 -*-
 
 # utils.py - Extra functions
 # Copyright (C) 2015  Alessandro Bokan
@@ -33,9 +33,9 @@ def load_prefixes(PATH_PREFIXES):
 
     """
     # Open file
-    f = codecs.open(PATH_PREFIXES, 'r', 'utf-8')
+    f = codecs.open(PATH_PREFIXES, "r", "utf-8")
     # Get prefixes
-    prefixes = [tuple(line.strip().split('\t')) for line in f.readlines()]
+    prefixes = [tuple(line.strip().split("\t")) for line in f.readlines()]
     # Close file
     f.close()
 
@@ -53,12 +53,12 @@ def load_homographs_heterophones(PATH_HOMOGRAPHS_HETEROPHONES):
 
     """
     # Open file
-    f, dct = codecs.open(PATH_HOMOGRAPHS_HETEROPHONES, 'r', 'utf-8'), {}
+    f, dct = codecs.open(PATH_HOMOGRAPHS_HETEROPHONES, "r", "utf-8"), {}
     # Get HHs
     for line in f.readlines():
-        spl = line.strip().split('|')
+        spl = line.strip().split("|")
         if dct.get(spl[0]) and spl[2] not in dct.get(spl[0]):
-            dct[spl[0]] = dct[spl[0]] + '|' + spl[2]
+            dct[spl[0]] = dct[spl[0]] + "|" + spl[2]
         else:
             dct[spl[0]] = spl[2]
     # Close file
