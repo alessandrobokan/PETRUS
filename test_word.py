@@ -28,13 +28,16 @@ if __name__ == '__main__':
     )
     args = parser.parse_args()
     # Get the input word
-    word = args.word.decode('utf-8').lower()
+    try:
+        word = args.word.decode('utf-8').lower()
+    except:
+        word = args.word.lower()
     # Initialize G2P transcriber
     g2p = G2PTranscriber(word, algorithm=args.separator)
 
-    print '\n{0} -> [{1}] | {2} | {3}\n'.format(
+    print('\n{0} -> [{1}] | {2} | {3}\n'.format(
         word,
         g2p.transcriber(),
         g2p.get_syllables_with_hyphen(),
         g2p.get_syllables_with_stress_boundaries()
-    )
+    ))

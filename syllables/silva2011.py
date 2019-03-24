@@ -22,7 +22,7 @@
 
 from __future__ import unicode_literals
 
-from cases import case1, case2, case3, case4, case5, case6, case7, case8, case9, case10
+from .cases import case1, case2, case3, case4, case5, case6, case7, case8, case9, case10
 
 import re
 
@@ -68,7 +68,7 @@ class Silva2011SyllableSeparator(object):
     def __init__(self, word, stress):
         try:
             self.word = word.decode('utf-8').lower()
-        except (UnicodeDecodeError, UnicodeEncodeError):
+        except:
             self.word = word.lower()
         self.stress = stress
 
