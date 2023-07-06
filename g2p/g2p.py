@@ -794,13 +794,13 @@ class G2PTranscriber(object):
                 # Quando for seguido de 'm' apenas em final de palavra
                 if tam - 1 > i and word[i + 1] == "m" and i + 1 == len(word) - 1:
                     # w = w[:j] + 'ãʊ̃' + w[j + 2:]
-                    w = w[:j] + "ɐ͂ʊ̃" + w[j + 2 :]
+                    w = w[:j] + "ɐ̃̃ʊ̃" + w[j + 2 :]
                     i += 1
                     j += 3
                 # Quando for seguido de 'm' apenas em final de palavra
                 elif tam - 1 > i and word[i + 1] in T1:
                     # w = w[:j] + 'ã' + w[j + 2:]
-                    w = w[:j] + "ɐ͂" + w[j + 2 :]
+                    w = w[:j] + "ɐ̃" + w[j + 2 :]
                     i += 1
                     j += 1
                 # Quando for seguida de 'm,n' na proxima sílaba
@@ -811,7 +811,7 @@ class G2PTranscriber(object):
                     and self.is_tonic_syllable(ts1, ts2, i)
                 ):
                     # w = w[:j] + 'ã' + w[j + 1:]
-                    w = w[:j] + "ɐ͂" + w[j + 1 :]
+                    w = w[:j] + "ɐ̃" + w[j + 1 :]
                     j += 1
                 # Quando for seguido de 'm' e seguido de 'p,b' na segunte sílaba
                 elif (
@@ -832,7 +832,7 @@ class G2PTranscriber(object):
                     and word[i + 2] in T1
                     and self.is_tonic_syllable(ts1, ts2, i)
                 ):
-                    w = w[:j] + "ɐ͂" + w[j + 1 :]
+                    w = w[:j] + "ɐ̃" + w[j + 1 :]
                     j += 1
 
                 # -----------------------------------------------------------------
@@ -903,7 +903,7 @@ class G2PTranscriber(object):
                 # -----------------------------------------------------------------
                 # Quando for seguido de 'n' apenas em final de palavra
                 if tam - 1 > i and word[i + 1] in T1:
-                    w = w[:j] + "ɐ͂" + w[j + 2 :]
+                    w = w[:j] + "ɐ̃" + w[j + 2 :]
                     i += 1
                     j += 1
                 # Quando for final de sílaba tônica seguida por outra sílaba
@@ -914,28 +914,28 @@ class G2PTranscriber(object):
                     and word[i + 2] in T1
                     and self.is_tonic_syllable(ts1, ts2, i)
                 ):
-                    w = w[:j] + "ɐ͂" + w[j + 1 :]
+                    w = w[:j] + "ɐ̃" + w[j + 1 :]
                     j += 1
                 # Quanfo for seguido de 'm,n' diante consoante oclusiva 'p,t,b,d'
                 elif tam - 1 > i and word[i + 1] in T1 and word[i - 1] in T2:
-                    w = w[:j] + "ɐ͂" + w[j + 1 :]
+                    w = w[:j] + "ɐ̃" + w[j + 1 :]
                     i += 1
                     j += 2
                 # Quanfo for seguido de 'm,n' diante consoante oclusiva 'f,v,s,z,j'
                 elif tam - 1 > i and word[i + 1] in T1 and word[i - 1] in T3:
-                    w = w[:j] + "ɐ͂" + w[j + 2 :]
+                    w = w[:j] + "ɐ̃" + w[j + 2 :]
                     i += 1
                     j += 1
                 # Quando for começo de sílaba seguido de 'm,n'
                 elif (
                     tam - 1 > i and (i == 0 or word[i - 1] == "-") and word[i + 1] in T1
                 ):
-                    w = w[:j] + "ɐ͂" + w[j + 2 :]
+                    w = w[:j] + "ɐ̃" + w[j + 2 :]
                     i += 1
                     j += 1
                 # Quando estiver em sílaba tônica
                 elif self.is_tonic_syllable(ts1, ts2, i):
-                    w = w[:j] + "ɐ͂" + w[j + 1 :]
+                    w = w[:j] + "ɐ̃" + w[j + 1 :]
                     j += 1
 
                 # Caso contrario fica com 'a'
@@ -1487,7 +1487,7 @@ class G2PTranscriber(object):
                     j += 1
                 # Quanfo for seguido de 'm,n'
                 elif tam - 1 > i and word[i + 1] in T1:
-                    w = w[:j] + "õʊ͂" + w[j + 2 :]
+                    w = w[:j] + "õʊ̃" + w[j + 2 :]
                     i += 1
                     j += 2
 
@@ -1648,7 +1648,7 @@ class G2PTranscriber(object):
                     j += 1
                 # Quanfo for seguido de 'm,n'
                 elif tam - 1 > i and word[i + 1] in T1:
-                    w = w[:j] + "ũʊ͂" + w[j + 2 :]
+                    w = w[:j] + "õʊ̃" + w[j + 2 :]
                     i += 1
                     j += 2
 
@@ -1665,13 +1665,13 @@ class G2PTranscriber(object):
                 # Quando for seguida de 'e'
                 if tam - 1 > i and word[i + 1] == "e":
                     # w = w[:j] + 'ãĩ' + w[j + 2:]
-                    w = w[:j] + "ɐ͂ɪ̃" + w[j + 2 :]
+                    w = w[:j] + "ɐ̃̃ɪ̃" + w[j + 2 :]
                     i += 1
                     j += 3
                 # Quando for seguida de 'o'
                 elif tam - 1 > i and word[i + 1] == "o":
                     # w = w[:j] + 'ãʊ̃' + w[j + 2:]
-                    w = w[:j] + "ɐ͂ʊ̃" + w[j + 2 :]
+                    w = w[:j] + "ɐ̃̃ʊ̃" + w[j + 2 :]
                     i += 1
                     j += 3
 
@@ -1680,10 +1680,10 @@ class G2PTranscriber(object):
                 # -----------------------------------------------------------------
                 # Quando for em final da palavra
                 elif tam - 1 == i:
-                    w = w[:j] + "ɐ͂"
+                    w = w[:j] + "ɐ̃"
 
                 else:
-                    w = w[:j] + "ɐ͂" + w[j + 1 :]
+                    w = w[:j] + "ɐ̃" + w[j + 1 :]
                     j += 1
 
             elif word[i] == "õ":
